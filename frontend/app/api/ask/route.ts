@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     const qEmbedding = await embedWithGemini(question);
 
     // 2) Búsqueda vectorial (RPC en Supabase)
-    const { data: matches, error: rpcErr } = await supabase.rpc("match_chunks", {
+    const { data: matches, error: rpcErr } = await supabase.rpc("match_chunks_v384", {
       query_embedding: qEmbedding,
       match_count: TOP_K,
     });
