@@ -29,7 +29,7 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-6">
-      <div className="max-w-2xl w-full bg-white rounded-2xl shadow-lg p-8">
+      <div className="max-w-2xl w-full bg-white rounded-2xl shadow-lg p-8 whitespace-pre-wrap">
         <h1 className="text-2xl font-semibold mb-6 text-center">🤖 Unibot (RAG)</h1>
 
         <textarea
@@ -50,7 +50,7 @@ export default function Home() {
         {answer && (
           <div className="mt-6 p-4 border rounded-lg bg-gray-100 whitespace-pre-wrap">
             <strong>Respuesta:</strong>
-            <p className="mt-2">{answer}</p>
+            <p className="mt-2 whitespace-pre-wrap">{answer}</p>
           </div>
         )}
       </div>

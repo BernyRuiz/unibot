@@ -35,8 +35,9 @@ function buildLocalAnswer(question: string, context: string): string {
 
 export async function askGemini(question: string, context: string): Promise<string> {
   const GEMINI_KEY = process.env.GEMINI_API_KEY;
-  // Limitar contexto para evitar rechazos por tamaño
-  const SAFE_CONTEXT = context.slice(0, 8000);
+
+  // permitir mucho más contexto (24k chars ~= 6k tokens)
+  const SAFE_CONTEXT = context.slice(0, 32000);
 
   if (!GEMINI_KEY) {
     console.warn("⚠️ Sin GEMINI_API_KEY: usando respuesta local.");
@@ -45,7 +46,6 @@ export async function askGemini(question: string, context: string): Promise<stri
 
   try {
     const res = await fetch(
-      // API v1 estable
       "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=" + GEMINI_KEY,
       {
         method: "POST",
@@ -68,7 +68,10 @@ ${SAFE_CONTEXT}`
               ]
             }
           ],
-          generationConfig: { temperature: 0.85, maxOutputTokens: 512 }
+          generationConfig: { 
+            temperature: 0.3, 
+            maxOutputTokens: 4096  // 🔥 RESPUESTAS COMPLETAS 
+          }
         })
       }
     );
