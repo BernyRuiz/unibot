@@ -37,7 +37,7 @@ export async function askGemini(question: string, context: string): Promise<stri
   const GEMINI_KEY = process.env.GEMINI_API_KEY;
 
   // permitir mucho más contexto (24k chars ~= 6k tokens)
-  const SAFE_CONTEXT = context.slice(0, 32000);
+  const SAFE_CONTEXT = context.slice(0, 24000);
 
   if (!GEMINI_KEY) {
     console.warn("⚠️ Sin GEMINI_API_KEY: usando respuesta local.");
@@ -69,7 +69,7 @@ ${SAFE_CONTEXT}`
             }
           ],
           generationConfig: { 
-            temperature: 0.3, 
+            temperature: 0.7, 
             maxOutputTokens: 4096  // 🔥 RESPUESTAS COMPLETAS 
           }
         })

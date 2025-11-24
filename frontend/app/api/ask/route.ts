@@ -3,7 +3,7 @@ import { supabase } from "@/lib/supabase";
 import { embedWithGemini, askGemini } from "@/lib/ai";
 
 const TOP_K = Number(process.env.RAG_TOP_K || 5);
-const CONF_THRESHOLD = Number(process.env.CONFIDENCE_THRESHOLD || 0.85);
+const CONF_THRESHOLD = Number(process.env.CONFIDENCE_THRESHOLD || 0.7);
 
 export async function POST(req: NextRequest) {
   try {
